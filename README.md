@@ -181,7 +181,7 @@ $$
   
   ![Image](https://github.com/user-attachments/assets/2b0a1d55-f666-40f9-8773-f2099a5c9430)
 
-   Gambar diatas menunjukkan bahwa RSME mendekati 0 artinya prediksi rating dari model sangat mendekati rating yang sebenarnya diberikan pengguna. Dengan nilai 0.2666 menunjukkan performa model cukup baik, karena rating biasanya berada di antara 0 dan 1 (setelah normalisasi oleh sigmoid). Model ini sudah berhasil dievaluasi dengan baik, dan mampu mempelajari reprenstasi interaksi user-movie secara efektif. 
+   Gambar diatas menunjukkan bahwa RSME mendekati 0 artinya prediksi rating dari model sangat mendekati rating yang sebenarnya diberikan pengguna. Dengan nilai 0.2660 menunjukkan performa model cukup baik, karena rating biasanya berada di antara 0 dan 1 (setelah normalisasi oleh sigmoid). Model ini sudah berhasil dievaluasi dengan baik, dan mampu mempelajari reprenstasi interaksi user-movie secara efektif. 
   
 
 ## Daftar Pustaka
