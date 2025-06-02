@@ -34,7 +34,7 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
 3. Rating : terdiri dari 100000 baris, dan 4 kolom
 
 - **Kondisi Data**
-  - Terdapat missing value pada data movie pada kolom relaese_date yang kehilangan satu data. Untuk di data demografi dan rating, tidak ada data yang hilang.
+  - Terdapat missing value pada data movie di kolom relaese_date yang kehilangan satu data. Untuk di data demografi dan rating, tidak ada data yang hilang.
 
 - **Variabel-variabel pada Movielens Rating Dataset adalah sebagai berikut :**
   - **movie_info (movie) :** merupakan informasi film, yang berisi 2 kolom kategorikal yaitu kolom movie title, dan release date. Kemudian terdapat 20 kolom numerik yaitu 1 kolom movie id, dan 19 kolom genre (unknown, action, adventure, animation, children's, comedy, crime, documentary, drama, fantasy, film-noir, horor, musical, mystery, romance, Sci-Fi, Thriller, War, dan Western)
@@ -156,7 +156,7 @@ Model ini dibangun dengan framework TensorFlow dan Keras, dan terdiri dari beber
    
 - **Menyajikan top-N Recommendation untuk satu pengguna**
 
-![Image](https://github.com/user-attachments/assets/158d201c-0634-4d8a-8909-e3d96582804b)
+![Image](https://github.com/user-attachments/assets/87b9552c-b451-4fe0-8ccc-fb0c191a5b41)
 
 ## Evaluation
 - **Metrik Evaluasi yang Digunakan**
@@ -171,7 +171,7 @@ $$
 
 - **Visualisasi Metrik Evaluasi**
 
-   ![Image](https://github.com/user-attachments/assets/854635ed-600c-42c6-9241-1116bf49546a)
+   ![Image](https://github.com/user-attachments/assets/a2a06011-fe75-4035-a43b-20203d458fc6)
 
     Gambar di atas menampilkan plot metrik Root Mean Squared Error (RMSE) selama proses training model. Garis biru menunjukkan nilai RMSE pada data pelatihan (training) untuk setiap epoch, yang terlihat menurun tajam di awal, lalu secara bertahap menjadi stabil setelah beberapa epoch. Sementara itu, garis oranye menunjukkan nilai RMSE pada data validasi (test), yang awalnya juga menurun namun kemudian cenderung stagnan atau sedikit meningkat.
 
@@ -179,7 +179,7 @@ $$
    
 - **Hasil Proyek Berdasarkan Metrik Evaluasi**
   
-  ![Image](https://github.com/user-attachments/assets/2a7b4292-5dbd-4ff9-aa25-c91142e7b0c0)
+  ![Image](https://github.com/user-attachments/assets/2b0a1d55-f666-40f9-8773-f2099a5c9430)
 
    Gambar diatas menunjukkan bahwa RSME mendekati 0 artinya prediksi rating dari model sangat mendekati rating yang sebenarnya diberikan pengguna. Dengan nilai 0.2644 menunjukkan performa model cukup baik, karena rating biasanya berada di antara 0 dan 1 (setelah normalisasi oleh sigmoid). Model ini sudah berhasil dievaluasi dengan baik, dan mampu mempelajari reprenstasi interaksi user-movie secara efektif. 
   
