@@ -33,6 +33,9 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
 2. Demografi Pengguna : terdiri dari 943 baris, dan 5 kolom
 3. Rating : terdiri dari 100000 baris, dan 4 kolom
 
+- **Kondisi Data**
+  - Terdapat missing value pada data movie pada kolom relaese_date yang kehilangan satu data. Untuk di data demografi dan rating, tidak ada data yang hilang.
+
 - **Variabel-variabel pada Movielens Rating Dataset adalah sebagai berikut :**
   - **movie_info (movie) :** merupakan informasi film, yang berisi 2 kolom kategorikal yaitu kolom movie title, dan release date. Kemudian terdapat 20 kolom numerik yaitu 1 kolom movie id, dan 19 kolom genre (unknown, action, adventure, animation, children's, comedy, crime, documentary, drama, fantasy, film-noir, horor, musical, mystery, romance, Sci-Fi, Thriller, War, dan Western)
 
@@ -76,6 +79,12 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
   
      ![Image](https://github.com/user-attachments/assets/77688f73-8f26-4a66-b1f1-32f771fb47f4)
 
+     Insight :
+
+      - Pada data rating ini memiliki 100000 baris dan 4 kolom. Yang terdiri user_id (id pengguna), movie_id, rating, dan unix timestamp.
+      - Pada diagram rating diatas menunjukkan pengguna paling banyak memberikan rating 4, dan paling sedikit memberikan rating 1.
+      - Pada pengecekan nilai yang hilang, data rating tidak memiliki nilai yang hilang.
+
 - **Data Preprocessing**
    - Menggabungkan kolom pada data movie, selain kolom movie_id, movie_title dan release_date, menjadi kolom genre sebagai berikut
 
@@ -86,7 +95,7 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
    - Melakukan Pengecekan Missing Values, sebelumnya pada saat menampilkan movie.info pada kolom release_data mengalami perbedaan jumlah data yaitu kehilangan 1 data, sehingga dilakukan pengisian nilai "Unknown". Agar seluruh kolom pada masing-masing data tidak ada yang missing value.
 
       ```
-      # Mengisi missing values di Books
+      # Mengisi missing values di Movie
       movie['release_date'] = movie['release_date'].fillna('Unknown')
       
       # Memeriksa missing values
@@ -103,11 +112,11 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
      
    - Mengelompokkan data berdasarkan demografi pengguna 
 
-     ![Image](https://github.com/user-attachments/assets/167af816-ca9b-4409-af06-afaf57f8f2a9)
+     ![Image](https://github.com/user-attachments/assets/c3e03b3c-2810-41b8-9e77-6664336c9be9)
      
    - Mengelompokkan data berdasarkan movie
 
-     ![Image](https://github.com/user-attachments/assets/55575511-22e5-4fea-90ca-5694688345ec)
+     ![Image](https://github.com/user-attachments/assets/0faf4830-0051-4650-a224-fab15f07e443)
 
 
 ## Data Preparation
