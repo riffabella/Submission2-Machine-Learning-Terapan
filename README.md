@@ -35,6 +35,7 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
 
 - **Kondisi Data**
   - Terdapat missing value pada data movie di kolom relaese_date yang kehilangan satu data. Untuk di data demografi dan rating, tidak ada data yang hilang.
+  - Terdapat penulisan nama kolom yang tidak sesuai, seperti menggunakan spasi dan tanda petik satu ('), yang akan menyebabkan error atau kesulitan dalam penulisan kode.
 
 - **Variabel-variabel pada Movielens Rating Dataset adalah sebagai berikut :**
   - **movie_info (movie) :** merupakan informasi film, yang berisi 2 kolom kategorikal yaitu kolom movie title, dan release date. Kemudian terdapat 20 kolom numerik yaitu 1 kolom movie id, dan 19 kolom genre (unknown, action, adventure, animation, children's, comedy, crime, documentary, drama, fantasy, film-noir, horor, musical, mystery, romance, Sci-Fi, Thriller, War, dan Western)
@@ -54,10 +55,6 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
        
       ![Image](https://github.com/user-attachments/assets/0dc7757d-487c-46a8-8fa9-eebf66d2bd56)
 
-   - Menampilkan 5 baris pertama dari dataframe demografi ``demografi.head()``
-
-     ![Image](https://github.com/user-attachments/assets/39615c5f-39ce-4574-8a1a-36ca9500e071)
-
    - Menampilkan informasi pengguna, yang memberikan informasi pekerjaan mereka
 
      ![Image](https://github.com/user-attachments/assets/6a9af991-0e25-4889-8528-f5c7df1a71fd)
@@ -66,10 +63,6 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
    - Menampilkan jumlah baris dan kolom serta jenis data setiap kolom ``rating.info()`` yang terdapat 4 kolom numerikal dibawah ini
        
      ![Image](https://github.com/user-attachments/assets/8c49f86f-2397-48bf-9178-a793ec6203c1)
-
-   - Menampilkan 5 baris pertama dari dataframe demografi ``rating.head()``
-
-     ![Image](https://github.com/user-attachments/assets/595bbd70-8e41-4719-9899-b968eed08fa9)
 
    - Menampilkan informasi pengguna yang memberikan rating, dan memberikan penilian berapa
 
@@ -83,61 +76,60 @@ Pada proyek ini, data yang digunakan adalah Movielens Rating Dataset yang tersed
 
       - Pada data rating ini memiliki 100000 baris dan 4 kolom. Yang terdiri user_id (id pengguna), movie_id, rating, dan unix timestamp.
       - Pada diagram rating diatas menunjukkan pengguna paling banyak memberikan rating 4, dan paling sedikit memberikan rating 1.
-      - Pada pengecekan nilai yang hilang, data rating tidak memiliki nilai yang hilang.
-
-- **Data Preprocessing**
-   - Menggabungkan kolom pada data movie, selain kolom movie_id, movie_title dan release_date, menjadi kolom genre sebagai berikut
-
-     ![Image](https://github.com/user-attachments/assets/8cb43cf0-d3cb-4da6-b868-e4d92bda1072)
-
-     Penggabungan kolom pada data movie digunakan untuk mempersingkat data movie. Dan dapat tahu dalam satu film memiliki berapa genre. Sehingga sekarang pada data movie hanya memiliki 4 kolom saja.
-
-   - Melakukan Pengecekan Missing Values, sebelumnya pada saat menampilkan movie.info pada kolom release_data mengalami perbedaan jumlah data yaitu kehilangan 1 data, sehingga dilakukan pengisian nilai "Unknown". Agar seluruh kolom pada masing-masing data tidak ada yang missing value.
-
-      ```
-      # Mengisi missing values di Movie
-      movie['release_date'] = movie['release_date'].fillna('Unknown')
-      
-      # Memeriksa missing values
-      print(movie.isnull().sum())
-      print(demografi.isnull().sum())
-      print(rating.isnull().sum())
-      ```
-
-     ![Image](https://github.com/user-attachments/assets/028cda6b-17a2-4765-a724-0c63e74083ca)
-
-   - Membuat dictionary untuk data movie_id, movie_title, dan genre yang disimpan pada movie_new sebagai berikut :
-
-     ![Image](https://github.com/user-attachments/assets/d1448791-922b-406a-a126-0354a26fb8e1)
-     
-   - Mengelompokkan data berdasarkan demografi pengguna 
-
-     ![Image](https://github.com/user-attachments/assets/c3e03b3c-2810-41b8-9e77-6664336c9be9)
-     
-   - Mengelompokkan data berdasarkan movie
-
-     ![Image](https://github.com/user-attachments/assets/0faf4830-0051-4650-a224-fab15f07e443)
-
 
 ## Data Preparation
 - **Teknik Data Preparation dan Proses Data Preparation :**
+  - Melakukan perubahan nama kolom pada data movie yang memiliki unsur spasi dan tanda petik satu (') seperti pada kolom movie id, movie title, release date, dan Chindren's. Dengan mengubahnya menjadi movie_id, movie_title, release_date, dan Childrens. Serta pada data demografi pengguna mengubah nama kolom sex menjadi gender. Hal ini dilakukan agar tidak menyebabkan error atau kesulitan dalam penulisan kode.
+  - Melakukan Pengecekan Missing Value pada masing-masing data, hal ini dilakukan agar dapat menerapkan pengisian data pada nilai yang hilang dengan menambahkan nilai "Unknown" sebagai placeholder atau kategori default. Dengan begitu, data tetap lengkap dan dapat diproses lebih lanjut tanpa harus menghapus baris, serta membantu menghindari error saat analisis atau pemodelan.
+  - Melakukan Penggabungan kolom one-hot encoding menjadi satu kolom genre yang berisi list genre untuk tiap film pada data Movie. Hal ini dilakukan, supaya format data movie lebih ringkas, dan lebih mudah dibaca. 
+  - Melakukan Pembersihan kolom one-hot genre karena sudah digabungkan dan supaya data movie lebih bersih. Sebagai berikut :
+
+      | movie_id | movie_title          | release_date | genre                             |
+      |----------|----------------------|--------------|-----------------------------------|
+      | 1        | Toy Story (1995)     | 01-Jan-95    | [Animation, Childrens, Comedy]    |
+      | 2        | GoldenEye (1995)     | 01-Jan-95    | [Action, Adventure, Thriller]     |
+      | 3        | Four Rooms (1995)    | 01-Jan-95    | [Thriller]                        |
+      | 4        | Get Shorty (1995)    | 01-Jan-95    | [Action, Comedy, Drama]           |
+      | 5        | Copycat (1995)       | 01-Jan-95    | [Crime, Drama, Thriller]          |
+
+  - Pembuatan DataFrame ```movie_new``` digunakan untuk menyimpan data film secara ringkas dan siap digunakan untuk sistem rekomendasi.
+ 
+      ![Image](https://github.com/user-attachments/assets/dc5e4694-0fb3-4656-81ca-c912f235803a)
+
+  - Melakukan pengelompokkan berdasarkan demograsi pengguna dan berdasarkan movie, hal ini dilakukan untuk menambahkan informasi baru untuk mempermudah analisis, seperti mengetahui rata-rata rating yang diberikan oleh masing-masing pengguna atau diterima oleh masing-masing film, serta mengetahui seberapa aktif pengguna dalam memberikan rating atau seberapa populer suatu film berdasarkan jumlah pengguna yang menilainya. Informasi ini dapat dimanfaatkan untuk pembuatan sistem rekomendasi yang lebih akurat. Sebagai berikut :
+       - Mengelompokkan berdasarkan demografi pengguna
+         
+         | User_id | Total Film yang Dinilai | Rata-rata Rating |
+         |---------|------------------------|------------------|
+         | 800     | 28                     | 3.750000         |
+         | 613     | 28                     | 4.321429         |
+         | 155     | 22                     | 2.636364         |
+         
+       - Mengelompokkan berdasarkan movie
+   
+         | Movie_id | Total Pengguna yang Memberi Penilaian | Rata-rata Rating |
+         |----------|---------------------------------------|------------------|
+         | 1182     | 13                                    | 2.307692         |
+         | 412      | 93                                    | 2.397849         |
+         | 9        | 299                                   | 3.896321         |
+
   - Melakukan Encoding pada kolom user_id dan movie_id, untuk mengubah nilai aslinya menjadi indeks numerik berurutan. Hal ini dilakukan agar data dapat digunakan sebagai input ke dalam embedding layer pada model NCF. Proses ini juga disertai dengan pembuatan pemetaan balik untuk mempermudah interpretasi hasil rekomendasi. Berikut contohnya pada encoding kolom user_id
 
-   ![Image](https://github.com/user-attachments/assets/ad217f1d-ccc2-4965-be55-6c37c8d1ba99)
+      ![Image](https://github.com/user-attachments/assets/ad217f1d-ccc2-4965-be55-6c37c8d1ba99)
      
    - Melakukan Mapping pada Hasil Encoding ke DataFrame, nilai hasil mapping ini disimpan di kolom baru (user dan movie) yang nantinya digunakan sebagai input ke dalam model. Langkah ini bertujuan untuk mengonversi data kategorikal menjadi numerik, sesuai dengan kebutuhan embedding layer dalam model NCF, tanpa menghilangkan ID asli yang masih dibutuhkan untuk interpretasi hasil rekomendasi.
 
   - Menghitung jumlah user dan movie unik yang di-encode. Informasi ini digunakan untuk menentukan dimensi embedding pada model rekomendasi. Selain itu, kolom rating dikonversi ke tipe data float32 agar sesuai dengan format TensorFlow, dan dilakukan pencarian nilai minimum serta maksimum rating untuk keperluan normalisasi. Langkah ini penting untuk menyesuaikan data dengan kebutuhan input model dan meningkatkan performa pelatihan. Sebagai berikut outputnya :
 
-  ![Image](https://github.com/user-attachments/assets/a52cddb3-3eed-4772-9298-929dcdb5a195) 
+     ![Image](https://github.com/user-attachments/assets/a52cddb3-3eed-4772-9298-929dcdb5a195) 
 
   - Melakukan Pengacakan Data menggunakan metode shuffling untuk menghindari bias akibat urutan data. Proses ini penting agar pembagian data ke dalam subset training dan validasi lebih merata dan representatif, serta untuk membantu model belajar dari data yang lebih beragam, sehingga meningkatkan kemampuan generalisasi model. Sebagai berikut outputnya :
 
-   ![Image](https://github.com/user-attachments/assets/a05fd48f-4be4-48d8-8af2-d5f86ba3a5c1)
+      ![Image](https://github.com/user-attachments/assets/cf76ee2c-8e57-4ab9-b404-e09ab80332db)
 
   - Melakukan Pembagian Data untuk Training dan Validasi, dengan pembuatan fitur input (x) berupa pasangan user dan movie hasil encoding, serta label output (y) berupa rating yang telah dinormalisasi. Selanjutnya, data dibagi menjadi dua subset, yaitu 80% untuk training dan 20% untuk validasi, agar model dapat dilatih dan diuji secara adil terhadap data yang tidak pernah dilihat sebelumnya. Langkah ini bertujuan untuk memastikan model belajar secara optimal dan mampu melakukan generalisasi. Sebagai berikut outputnya :
 
-   ![Image](https://github.com/user-attachments/assets/fb869f2d-2b7a-40f8-874d-13310f28aa13)
+      ![Image](https://github.com/user-attachments/assets/fb869f2d-2b7a-40f8-874d-13310f28aa13)
 
 ## Modeling
 Dalam proyek ini, digunakan pendekatan **Neural Collaborative Filtering (NCF)** untuk membangun sistem rekomendasi film berbasis data historis interaksi pengguna. Model yang digunakan adalah RecommenderNet, yaitu sebuah model neural network yang mengimplementasikan teknik matrix factorization menggunakan embedding layer untuk mempelajari representasi laten (fitur tersembunyi) dari user dan movie.
@@ -156,7 +148,7 @@ Model ini dibangun dengan framework TensorFlow dan Keras, dan terdiri dari beber
    
 - **Menyajikan top-N Recommendation untuk satu pengguna**
 
-![Image](https://github.com/user-attachments/assets/87b9552c-b451-4fe0-8ccc-fb0c191a5b41)
+   ![Image](https://github.com/user-attachments/assets/710df43b-37bb-4de6-a9dd-0d166cf97f4b)
 
 ## Evaluation
 - **Metrik Evaluasi yang Digunakan**
@@ -171,7 +163,7 @@ $$
 
 - **Visualisasi Metrik Evaluasi**
 
-   ![Image](https://github.com/user-attachments/assets/a2a06011-fe75-4035-a43b-20203d458fc6)
+  ![Image](https://github.com/user-attachments/assets/ba1e1202-1f27-444e-a826-5932c28f82f1)
 
     Gambar di atas menampilkan plot metrik Root Mean Squared Error (RMSE) selama proses training model. Garis biru menunjukkan nilai RMSE pada data pelatihan (training) untuk setiap epoch, yang terlihat menurun tajam di awal, lalu secara bertahap menjadi stabil setelah beberapa epoch. Sementara itu, garis oranye menunjukkan nilai RMSE pada data validasi (test), yang awalnya juga menurun namun kemudian cenderung stagnan atau sedikit meningkat.
 
@@ -179,9 +171,9 @@ $$
    
 - **Hasil Proyek Berdasarkan Metrik Evaluasi**
   
-  ![Image](https://github.com/user-attachments/assets/2b0a1d55-f666-40f9-8773-f2099a5c9430)
+   ![Image](https://github.com/user-attachments/assets/93147321-aa0f-40be-be84-c18aa8093a96)
 
-   Gambar diatas menunjukkan bahwa RSME mendekati 0 artinya prediksi rating dari model sangat mendekati rating yang sebenarnya diberikan pengguna. Dengan nilai 0.2660 menunjukkan performa model cukup baik, karena rating biasanya berada di antara 0 dan 1 (setelah normalisasi oleh sigmoid). Model ini sudah berhasil dievaluasi dengan baik, dan mampu mempelajari reprenstasi interaksi user-movie secara efektif. 
+   Gambar diatas menunjukkan bahwa RSME mendekati 0 artinya prediksi rating dari model sangat mendekati rating yang sebenarnya diberikan pengguna. Dengan nilai 0.2673 menunjukkan performa model cukup baik, karena rating biasanya berada di antara 0 dan 1 (setelah normalisasi oleh sigmoid). Model ini sudah berhasil dievaluasi dengan baik, dan mampu mempelajari reprenstasi interaksi user-movie secara efektif. 
   
 
 ## Daftar Pustaka
